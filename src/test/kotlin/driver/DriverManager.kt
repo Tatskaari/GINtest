@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.firefox.FirefoxProfile
 import java.sql.DriverManager
 import kotlin.reflect.KClass
+import kotlin.test.fail
 
 
 enum class Drivers {
@@ -33,12 +34,18 @@ enum class Drivers {
 }
 
 object DriverManager {
-  val driver = run {
-    val driverName = try {
-      System.getProperty("browser.driver")!!
-    } catch (e: Exception) {
-      "chrome"
+  private var driver : WebDriver? = null
+
+  fun openBrowser(browser: String) : WebDriver {
+    driver = Drivers.getDriver(browser).driver()
+    return driver!!
+  }
+
+  fun driver(): WebDriver {
+    if (driver == null){
+      fail("Please open the browser first")
+    } else {
+      return driver!!
     }
-    Drivers.getDriver(driverName).driver()
   }
 }

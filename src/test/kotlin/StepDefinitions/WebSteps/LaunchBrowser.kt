@@ -7,10 +7,14 @@ import driver.DriverManager
 class LaunchBrowser: En {
     val driver = DriverManager.driver
 
-    @Given("^I open \"([^\"]*)\"")
-    fun openBrowser(url: String) {
-        println("Launching to $url")
-        driver.navigate().to(url)
+
+    init {
+        Given("^I open \"([^\"]*)\"") { page: String ->
+            println("Launching to $page")
+            driver.navigate().to(page)
+        }
     }
 
 }
+
+

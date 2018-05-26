@@ -1,15 +1,13 @@
-package driver
+package drivermanager
 
 import io.github.bonigarcia.wdm.WebDriverManager
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.firefox.FirefoxProfile
-import java.sql.DriverManager
-import kotlin.reflect.KClass
 
 
-enum class Drivers {
+private enum class Drivers {
   FIREFOX {
     override fun driver(): WebDriver {
       WebDriverManager.getInstance(FirefoxDriver::class.java).setup()
@@ -32,13 +30,11 @@ enum class Drivers {
 
 }
 
-object DriverManager {
-  val driver = run {
-    val driverName = try {
-      System.getProperty("browser.driver")!!
-    } catch (e: Exception) {
-      "chrome"
-    }
-    Drivers.getDriver(driverName).driver()
+val driver = run {
+  val driverName = try {
+    System.getProperty("browser.driver")!!
+  } catch (e: Exception) {
+    "chrome"
   }
+  Drivers.getDriver(driverName).driver()
 }

@@ -23,6 +23,12 @@
             <artifactId>kotlin-stdlib-jdk8</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <!--Junit-->
         <dependency>
@@ -44,6 +50,12 @@
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>gherkin</artifactId>
+            <version>2.7.3</version>
+            <scope>provided</scope>
         </dependency>
 
         <!--Selenium dependencies-->
@@ -73,7 +85,7 @@
                         <configuration>
                             <sourceDirs>
                                 <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
-                                <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                                <sourceDir>src/main/kotlin</sourceDir>
                             </sourceDirs>
                         </configuration>
                     </execution>
